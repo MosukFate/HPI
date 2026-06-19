@@ -1,0 +1,47 @@
+# Python/cache
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Local environments and editor state
+.venv/
+venv/
+env/
+.env
+.vscode/
+.idea/
+
+# Runtime assets and large files
+data/
+pretrained/
+checkpoints/
+work_dirs/
+work_dirs_*/
+outputs/
+analysis_outputs/
+Talk2DINO/weights/
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.pkl
+*.pickle
+
+# Logs and temporary outputs
+*.log
+*.log.json
+*.tmp
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.zst
+*.npy
+*.npz
+
+# OS files
+.DS_Store

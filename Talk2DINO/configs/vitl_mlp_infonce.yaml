@@ -1,0 +1,17 @@
+model:
+  name: ProjectionLayer
+  in_dim: 768        # CLIP ViT-L/14 text vector
+  out_dim: 1024      # DINOv2-L/14 patch width
+  hidden_dim: 1024
+  depth: 2
+  norm_out: true
+  act: tanh
+  hidden_layer: true
+
+train:
+  lr: 1.0e-4
+  ltype: infonce
+  num_epochs: 100
+  batch_size: 128
+  temperature: 0.07
+  save_best_model: false

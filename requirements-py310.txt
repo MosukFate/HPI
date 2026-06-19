@@ -1,0 +1,38 @@
+# Verified with Python 3.10.18 and CUDA 11.8 wheels.
+
+# 1. PyTorch stack
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch==2.0.1
+torchvision==0.15.2+cu118
+xformers==0.0.20
+
+# 2. OpenMMLab stack
+--find-links https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html
+mmcv-full==1.7.2
+mmengine==0.10.7
+mmdet==2.28.2
+
+# 3. HPI backbone and prompt dependencies
+timm==1.0.3
+einops==0.8.0
+transformers==4.48.0
+tokenizers==0.21.2
+huggingface-hub==0.24.2
+ftfy==6.3.1
+regex==2025.9.18
+sentencepiece==0.2.1
+protobuf==7.34.1
+clip @ git+https://github.com/openai/CLIP.git@dcba3cb2e2827b402d2701e7e1c7d9fed8a20ef1
+
+# 4. Scientific computing, datasets, and evaluation
+numpy==1.26.4
+scipy==1.13.1
+opencv-python==4.11.0.86
+Pillow==10.3.0
+matplotlib==3.9.0
+pycocotools==2.0.7
+cityscapesScripts==2.2.4
+prettytable==3.10.0
+tqdm==4.67.1
+yacs==0.1.8
+
