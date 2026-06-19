@@ -1,6 +1,10 @@
-# Hierarchical Prompt Injection
+# [ECCV 2026] Hierarchical Prompt Injector for Domain Generalization Segmentation
 
-Official implementation of Hierarchical Prompt Injection (HPI) for domain-adaptive semantic segmentation.
+Official implementation of the ECCV 2026 paper "Hierarchical Prompt Injector for Domain Generalization Segmentation".
+
+XIN KUN LIN, Ruoyu Guo, Jiaqi Guo, Maurice Pagnucco, Yang Song
+
+University of New South Wales
 
 ## Installation
 
@@ -24,7 +28,7 @@ Please download the pre-trained VFM and VLM models and save them in the `./pretr
 
 ## HPI Weights
 
-Please download the Talk2DINO projection weight and save it in `./Talk2DINO/weights`.
+Please download the [Talk2DINO](https://github.com/lorebianchi98/Talk2DINO) projection weight and save it in `./Talk2DINO/weights`.
 
 | Model | Type | Link |
 | --- | --- | --- |
@@ -47,15 +51,22 @@ Talk2DINO/
 
 Please download HPI checkpoints and save them in the `./checkpoints` folder.
 
-| Model | Backbone | Setting | Link |
+| Model | Pretrained | Trained on | Link |
 | --- | --- | --- | --- |
 | HPI-CLIP | CLIP | GTA -> Cityscapes | [download link](https://drive.google.com/drive/folders/1DxtNRlQlSFkI6r3hzO0rvpQKc4VDb3XP?usp=sharing) |
 | HPI-EVA | EVA02-CLIP | GTA -> Cityscapes | [download link](https://drive.google.com/drive/folders/1DxtNRlQlSFkI6r3hzO0rvpQKc4VDb3XP?usp=sharing) |
 | HPI-EVA | EVA02-CLIP | Cityscapes -> Mapillary | [download link](https://drive.google.com/drive/folders/1DxtNRlQlSFkI6r3hzO0rvpQKc4VDb3XP?usp=sharing) |
 
-## Data Preparation
+## Datasets
 
-Please arrange datasets as follows:
+Please prepare the datasets and edit the data roots in the config files according to your environment:
+
+```python
+src_dataset_dict = dict(..., data_root='[YOUR_DATA_FOLDER_ROOT]', ...)
+tgt_dataset_dict = dict(..., data_root='[YOUR_DATA_FOLDER_ROOT]', ...)
+```
+
+The final folder structure should look like this:
 
 ```text
 data/
@@ -102,15 +113,32 @@ python tools/convert_datasets/cityscapes.py data/cityscapes --nproc 8
 ## Training
 
 ```bash
-python train.py configs/hpi_clip_vit-l_1e-4_20k-g2c-512.py
-python train.py configs/hpi_eva_vit-l_1e-4_20k-g2c-512.py
-python train.py configs/hpi_eva_vit-l_1e-4_20k-c2m-512.py
+python train.py configs/[TRAIN_CONFIG]
 ```
 
-## Testing
+## Evaluation
 
 ```bash
-python test.py configs/hpi_clip_vit-l_1e-4_20k-g2c-512.py checkpoints/hpi_clip_vit-l_1e-4_20k-g2c-512_best.pth --eval mIoU
-python test.py configs/hpi_eva_vit-l_1e-4_20k-g2c-512.py checkpoints/hpi_eva_vit-l_1e-4_20k-g2c-512_best.pth --eval mIoU
-python test.py configs/hpi_eva_vit-l_1e-4_20k-c2m-512.py checkpoints/hpi_eva_vit-l_1e-4_20k-c2m-512_best.pth --eval mIoU
+python test.py configs/[TEST_CONFIG] checkpoints/[MODEL] --eval mIoU
 ```
+
+## Citation
+
+If you find our code helpful, please cite our paper:
+
+```bibtex
+@inproceedings{lin2026hierarchical,
+  title     = {Hierarchical Prompt Injector for Domain Generalization Segmentation},
+  author    = {Lin, Xinkun and Guo, Ruoyu and Guo, Jiaqi and Pagnucco, Maurice and Song, Yang},
+  booktitle = {Proceedings of the European Conference on Computer Vision (ECCV)},
+  year      = {2026}
+}
+```
+
+## Acknowledgements
+
+This project is based on the following open-source projects. We thank the authors for sharing their code.
+
+- [MMSegmentation](https://github.com/open-mmlab/mmsegmentation)
+- [TLDR](https://github.com/ssssshwan/TLDR)
+- [Talk2DINO](https://github.com/lorebianchi98/Talk2DINO): `Talk2DINO/src` and `Talk2DINO/configs` are adapted from the official repository.
