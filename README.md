@@ -32,7 +32,7 @@ Please download the [Talk2DINO](https://github.com/lorebianchi98/Talk2DINO) proj
 
 | Model | Type | Link |
 | --- | --- | --- |
-| Talk2DINO | `vitl_mlp_infonce.pth` | [download link](https://drive.google.com/drive/folders/1DxtNRlQlSFkI6r3hzO0rvpQKc4VDb3XP?usp=sharing) |
+| Talk2DINO | `vitl_mlp_infonce.pth` | [download link](https://drive.google.com/file/d/1I8o_br-__iApEE1oNSTcEzi6XAE893U6/view?usp=drive_link) |
 
 The expected weight structure is:
 
@@ -53,9 +53,10 @@ Please download HPI checkpoints and save them in the `./checkpoints` folder.
 
 | Model | Pretrained | Trained on | Link |
 | --- | --- | --- | --- |
-| HPI-CLIP | CLIP | GTA -> Cityscapes | [download link](https://drive.google.com/drive/folders/1DxtNRlQlSFkI6r3hzO0rvpQKc4VDb3XP?usp=sharing) |
-| HPI-EVA | EVA02-CLIP | GTA -> Cityscapes | [download link](https://drive.google.com/drive/folders/1DxtNRlQlSFkI6r3hzO0rvpQKc4VDb3XP?usp=sharing) |
-| HPI-EVA | EVA02-CLIP | Cityscapes -> Mapillary | [download link](https://drive.google.com/drive/folders/1DxtNRlQlSFkI6r3hzO0rvpQKc4VDb3XP?usp=sharing) |
+| HPI-CLIP-G2C | CLIP | GTA -> Cityscapes | [download link](https://drive.google.com/drive/folders/1bJMWy1izDSOnSVlXfeFnRtnZIL6duXeM?usp=drive_link) |
+| HPI-EVA-G2C | EVA02-CLIP | GTA -> Cityscapes | [download link](https://drive.google.com/drive/folders/1RrBWqW198O2mKsyN-_Nnxj8xGpteV4Y8?usp=drive_link) |
+| HPI-CLIP-C2M | CLIP | Cityscapes -> Mapillary | [download link](https://drive.google.com/drive/folders/16reC5UDlsIX9PPopv7Uxw_esJzkRui6c?usp=drive_link) |
+| HPI-EVA-C2M | EVA02-CLIP | Cityscapes -> Mapillary | [download link](https://drive.google.com/drive/folders/1TiPQDVBPpsfAPhnRdtQu9DmufoRqXCSS?usp=drive_link) |
 
 ## Datasets
 
@@ -66,49 +67,46 @@ src_dataset_dict = dict(..., data_root='[YOUR_DATA_FOLDER_ROOT]', ...)
 tgt_dataset_dict = dict(..., data_root='[YOUR_DATA_FOLDER_ROOT]', ...)
 ```
 
-The final folder structure should look like this:
+The expected dataset layout is:
 
 ```text
-data/
-  gta/
-    images/
-    labels/
-    sample_class_stats.json
-    sample_class_stats_dict.json
-    samples_with_class.json
-
-  cityscapes/
-    leftImg8bit/
-      train/
-      val/
-    gtFine/
-      train/
-      val/
-    sample_class_stats.json
-    sample_class_stats_dict.json
-    samples_with_class.json
-
-  mapillary/
-    validation/
+HPI/
+  data/
+    gta/
       images/
       labels/
 
-  bdd100k/
-    images/
-      10k/
+    cityscapes/
+      leftImg8bit/
+        train/
         val/
-    labels/
-      sem_seg/
-        colormaps/
+      gtFine/
+        train/
+        val/
+
+    bdd100k/
+      images/
+        10k/
+          train/
           val/
+      labels/
+        sem_seg/
+          masks/
+            train/
+            val/
+
+    mapillary/
+      training/
+        images/
+      cityscapes_trainIdLabel/
+        train/
+          label/
+      half/
+        val_img/
+        val_label/
 ```
 
-The rare-class sampling files can be generated with:
-
-```bash
-python tools/convert_datasets/gta.py data/gta --nproc 8
-python tools/convert_datasets/cityscapes.py data/cityscapes --nproc 8
-```
+The release configs use the dataset directories above; auxiliary class-statistics JSON files are not required in the README setup.
 
 ## Training
 
